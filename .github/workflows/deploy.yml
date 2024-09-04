@@ -29,6 +29,10 @@ jobs:
       - name: Build project
         run: npm run build
 
+      # Listar archivos en el directorio de salida para verificar que existe
+      - name: List build directory
+        run: ls -la ./dist
+
       # Desplegar en el servidor FTP
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
@@ -36,5 +40,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: /dist/
-          server-dir: /public_html/
+          local-dir: ./dist
+          server-dir: /public_html
