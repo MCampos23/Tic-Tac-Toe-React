@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'backend/**'   # Solo ejecuta cuando hay cambios en la carpeta backend
-      - '*.php'        # También cuando hay cambios en cualquier archivo PHP en el directorio raíz (si es necesario)
+      # - '*.php'        # También cuando hay cambios en cualquier archivo PHP en el directorio raíz (si es necesario)
 
 jobs:
   deploy-backend:
