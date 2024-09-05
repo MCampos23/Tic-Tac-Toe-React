@@ -25,13 +25,13 @@ jobs:
       # 3. Instalar dependencias y hacer el build del frontend
       - name: Install dependencies and build React app
         run: |
-          cd frontend  # Moverse al directorio frontend
+          cd frontend/tic-tac-toe  # Moverse al directorio frontend
           npm install
           npm run build
 
       # 4. Listar los archivos del directorio de build para verificar el resultado
       - name: List build directory
-        run: ls -la ./frontend/dist
+        run: ls -la ./frontend/tic-tac-toe/dist
 
       # 5. Desplegar el build del frontend al servidor FTP
       - name: Deploy Frontend to FTP
@@ -41,4 +41,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./frontend/dist  # Carpeta donde se generó el build
-          server-dir: /ruta/en/servidor/frontend  # Directorio de destino en el servidor FTP
+          server-dir: /public_html/frontend/tic-tac-toe  # Directorio de destino en el servidor FTP
