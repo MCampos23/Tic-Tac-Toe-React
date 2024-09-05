@@ -1,2 +1,3 @@
 <?php
-echo '<a href="frontend/tic-tac-toe/">Tic tac toe</a>';
+echo '<h1>Mis apps</h1>';
+echo '<a href="frontend/tic_tac_toe/">Tic tac toe</a>';
