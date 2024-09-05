@@ -1,0 +1,29 @@
+name: Deploy Backend (PHP)
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'frontend/**'  # Ignorar los cambios en la carpeta frontend
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Desplegar todos los archivos excepto los de frontend al servidor FTP
+      - name: Deploy Backend to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./  # Subir todo desde la raíz del repositorio
+          server-dir: /public_html/  # Directorio de destino en tu servidor FTP
+          exclude: |
+            frontend/**  # Excluir explícitamente los archivos de frontend
