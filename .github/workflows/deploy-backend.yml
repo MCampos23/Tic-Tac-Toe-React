@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'frontend/**'  # Ignorar los cambios en la carpeta frontend
+    paths:
+      - 'backend/**'   # Solo ejecuta cuando hay cambios en la carpeta backend
+      - '*.php'        # También cuando hay cambios en cualquier archivo PHP en el directorio raíz (si es necesario)
 
 jobs:
   deploy-backend:
@@ -16,14 +17,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Desplegar todos los archivos excepto los de frontend al servidor FTP
+      # 2. Desplegar archivos PHP y del backend al servidor FTP
       - name: Deploy Backend to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./  # Subir todo desde la raíz del repositorio
-          server-dir: /public_html/  # Directorio de destino en tu servidor FTP
-          exclude: |
-            frontend/**  # Excluir explícitamente los archivos de frontend
+          local-dir: ./backend/  # Cambia según la estructura de tu backend
+          server-dir: /public_html/  # Directorio de destino en el servidor FTP
