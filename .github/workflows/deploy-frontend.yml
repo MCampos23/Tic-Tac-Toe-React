@@ -28,12 +28,17 @@ jobs:
           cd frontend/tic-tac-toe/  # Moverse al directorio frontend
           npm install
           npm run build
-
-      # 4. Listar los archivos del directorio de build para verificar el resultado
+          
+      # 4. Renombrar inex.html a index.php    
+      - name: Rename index.html to index.php
+        run: |
+          mv frontend/build/index.html frontend/build/index.php
+          
+      # 5. Listar los archivos del directorio de build para verificar el resultado
       - name: List build directory
         run: ls -la ./frontend/tic-tac-toe/dist
 
-      # 5. Desplegar el build del frontend al servidor FTP
+      # 6. Desplegar el build del frontend al servidor FTP
       - name: Deploy Frontend to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
