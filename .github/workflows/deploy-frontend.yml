@@ -1,0 +1,44 @@
+name: Build and Deploy Frontend (React)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'  # Solo ejecuta cuando hay cambios en la carpeta frontend
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js para el build de React
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. Instalar dependencias y hacer el build del frontend
+      - name: Install dependencies and build React app
+        run: |
+          cd frontend  # Moverse al directorio frontend
+          npm install
+          npm run build
+
+      # 4. Listar los archivos del directorio de build para verificar el resultado
+      - name: List build directory
+        run: ls -la ./frontend/dist
+
+      # 5. Desplegar el build del frontend al servidor FTP
+      - name: Deploy Frontend to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./frontend/dist  # Carpeta donde se generó el build
+          server-dir: /ruta/en/servidor/frontend  # Directorio de destino en el servidor FTP
