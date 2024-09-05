@@ -40,5 +40,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./frontend/dist/  # Carpeta donde se generó el build
+          local-dir: ./frontend/tic-tac-toe/dist/  # Carpeta donde se generó el build
           server-dir: /public_html/frontend/tic-tac-toe/  # Directorio de destino en el servidor FTP
