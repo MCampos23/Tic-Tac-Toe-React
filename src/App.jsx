@@ -134,7 +134,7 @@ function App() {
         )}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
-      <Log turns={gameTurns} />
+      <Log turns={gameTurns} playerOneName={players.X.toUpperCase()} playerTwoName={players.O.toUpperCase()}/>
     </main>
   );
 }
