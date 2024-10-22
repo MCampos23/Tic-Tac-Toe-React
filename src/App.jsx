@@ -4,6 +4,7 @@ import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
 import { WINNING_COMBINATIONS } from "./winning-combinations";
 import GameOver from "./components/gameOver";
+import React from 'react';
 
 const url = "https://api.restful-api.dev/objects";
 

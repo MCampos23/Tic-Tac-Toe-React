@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Log({ turns, playerOneName, playerTwoName}) {
     
     return <ol id="log">

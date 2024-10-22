@@ -1,4 +1,5 @@
 import { useState } from "react"
+import React from 'react';
 
 export default function Player({ symbol, isActive, initialName, onChangeName}){
   const [playerName, setPlayerName] = useState(initialName)  
