@@ -1,0 +1,28 @@
+name: Deploy Backend (PHP)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'   # Solo ejecuta cuando hay cambios en la carpeta backend
+      # - '*.php'        # También cuando hay cambios en cualquier archivo PHP en el directorio raíz (si es necesario)
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Desplegar archivos PHP y del backend al servidor FTP
+      - name: Deploy Backend to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./backend/  # Cambia según la estructura de tu backend
+          server-dir: /public_html/  # Directorio de destino en el servidor FTP
